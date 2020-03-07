@@ -8,14 +8,29 @@ class Game {
     this.board = [];
     this.makeBoard();
     this.makeHtmlBoard();
+    this.resetGame();
   }
 
+
+resetGame () {
+  let htmlTableData = document.querySelectorAll("td");
+  console.log(htmlTableData);
+  for (let cell of htmlTableData) {
+    // console.log(cell);
+    // console.log(cell.firstChild);
+    if (cell.firstChild !== null) {
+      let child = cell.firstChild;
+      cell.removeChild(child);
+    }
+  }
+}
 
   /** makeBoard: create in-JS board structure:
  *   board = array of rows, each row is array of cells  (board[y][x])
  */
 
   makeBoard() {
+  
   for (let y = 0; y < this.HEIGHT; y++) {
     this.board.push(Array.from({ length: this.WIDTH }));
   }
@@ -150,14 +165,28 @@ handleClick (evt) {
   }
 }
 
- // can we invoke functions within classes vs. in a constructor?
 //  this.makeBoard();
+ // can we invoke functions within classes vs. in a constructor?
 //  this.makeHtmlBoard();
 
 }
 
-new Game(6, 7);
+let startGameButton = document.querySelector("button");
+startGameButton.addEventListener("click", new Game(6,7));
 
+// function resetGame () {
+//   let htmlTableData = document.querySelectorAll("td");
+//   console.log(htmlTableData);
+//   for (let cell of htmlTableData) {
+//     // console.log(cell);
+//     // console.log(cell.firstChild);
+//     if (cell.firstChild !== null) {
+//       let child = cell.firstChild;
+//       cell.removeChild(child);
+//     }
+//   }
+// //   currGame.makeBoard();
+// // }
 
 
 
